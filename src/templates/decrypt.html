@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+    <title>PDF解密结果</title>
+</head>
+<body>
+    <div class="container">
+        <h1>PDF解密结果</h1>
+        <p>
+            {% if success %}
+                PDF文件已成功解密！您可以<a href="{{ url_for('download_file', token=output_pdf) }}">下载解密后的文件</a>。
+            {% elif incorrect_password %}
+                密码不正确，请重试。
+            {% else %}
+                PDF文件未加密。
+            {% endif %}
+        </p>
+        <a href="{{ url_for('index') }}">返回上传页面</a>
+    </div>
+</body>
+</html>

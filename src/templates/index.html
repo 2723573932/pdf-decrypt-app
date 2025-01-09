@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+    <title>PDF解密应用</title>
+</head>
+<body>
+    <div class="container">
+        <h1>上传PDF文件进行解密</h1>
+        <form action="/decrypt" method="post" enctype="multipart/form-data">
+            <div class="upload-area" id="dropZone">
+                <label for="file">
+                    <div class="upload-prompt">
+                        拖放PDF文件到这里或点击选择文件
+                        <input type="file" id="file" name="file" accept="application/pdf" required>
+                    </div>
+                </label>
+            </div>
+            <div id="fileName" class="file-name"></div>
+            <label for="password">输入密码:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">解密文件</button>
+        </form>
+        <div id="message">
+            {% if message %}
+                <p>{{ message }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('file');
+        const fileNameDisplay = document.getElementById('fileName');
+
+        // 拖拽事件处理
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                const file = files[0];
+                if (file.type === 'application/pdf') {
+                    fileInput.files = files;
+                    fileNameDisplay.textContent = file.name;
+                } else {
+                    alert('请上传 PDF 文件');
+                }
+            }
+        });
+
+        // 常规文件选择处理
+        fileInput.addEventListener('change', (e) => {
+            if (fileInput.files.length > 0) {
+                fileNameDisplay.textContent = fileInput.files[0].name;
+            }
+        });
+    </script>
+</body>
+</html>
