@@ -4,12 +4,13 @@
 
 ## 项目结构
 
-- `src/static/style.css`: 包含网页应用程序的CSS样式，定义HTML页面的布局和外观。
-- `src/templates/index.html`: 主要HTML页面，用户可以在此上传PDF文件，并显示消息。
-- `src/templates/decrypt.html`: 显示解密过程的结果，包括解密是否成功或密码是否错误的消息。
-- `src/app.py`: 应用程序的入口点，设置Flask网络服务器，处理文件上传，并与`pdf_decrypt.py`工具集成以管理解密过程。
-- `src/utils/pdf_decrypt.py`: 包含使用提供的密码解密PDF文件的逻辑，检查PDF是否加密并尝试解密，返回适当的状态。
-- `requirements.txt`: 列出项目所需的依赖项，包括Flask和PyPDF2。
+主要组件说明：
+
+- `app.py`: FastAPI应用程序入口，处理文件上传和下载
+- `static/style.css`: 网页样式定义
+- `templates/`: 包含网页模板文件
+- `utils/pdf_decrypt.py`: 提供PDF文件加密检查和解密功能
+- `downloads/` 和 `uploads/`: 用于临时存储文件的目录
 
 ## 安装和使用
 
@@ -22,7 +23,7 @@
    ```
    python src/app.py
    ```
-4. 在浏览器中访问 `http://127.0.0.1:5000`，上传您的PDF文件并输入密码进行解密。
+4. 在浏览器中访问 `http://127.0.0.1:8000`，上传您的PDF文件并输入密码进行解密。
 
 ## 许可证
 
