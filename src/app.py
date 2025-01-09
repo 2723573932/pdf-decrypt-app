@@ -213,4 +213,4 @@ async def save_uploaded_file(file, upload_folder: str) -> str:
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("app:app", host="0.0.0.0", port=8000, workers=4)
+    uvicorn.run("app:app", host="0.0.0.0", port=80, workers=4)
